@@ -13,9 +13,9 @@ jobs:
         id: build-push-acr
         uses: azure/acr-build@v1
         with:
-          service_principal: ${{ secrets.service_principal }}
-          service_principal_password: ${{ secrets.service_principal_password }}
-          tenant: ${{ secrets.tenant }}
+          #service_principal: ${{ secrets.service_principal }}
+          #service_principal_password: ${{ secrets.service_principal_password }}
+          #tenant: ${{ secrets.tenant }}
           registry: ${{ secrets.registry }}
           repository: ${{ secrets.repository }}
           image:  azure-vote-front
@@ -27,6 +27,12 @@ jobs:
         uses: azure/login@v1.4.3
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+      # - name: Login to ACR
+      #   run: az acr login --name containerregistryghrunnersampletwo.azurecr.io
+      # - name: Build and Push Docker image
+      #   run: |
+      #     docker build -t containerregistryghrunnersampletwo.azurecr.io/<your-image-name>:${{ github.sha }} .
+      #     docker push containerregistryghrunnersampletwo.azurecr.io/<your-image-name>:${{ github.sha }}
       - name: Set AKS context
         id: set-context
         uses: azure/aks-set-context@v3
